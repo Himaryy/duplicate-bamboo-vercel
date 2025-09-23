@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
-class visitor extends Model
+class Visitor extends Model
 {
     use HasFactory;
     protected $fillable = ['ip_address', 'visited_at'];

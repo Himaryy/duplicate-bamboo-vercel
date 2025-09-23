@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\visitor;
+use App\Models\Visitor;
 use Symfony\Component\HttpFoundation\Response;
 
 class TrackVisitor
