@@ -7,13 +7,18 @@
   "routes": [
     {
       "src": "/(.*)",
+      "dest": "/public/$1",
+      "continue": true
+    },
+    {
+      "src": "/(.*)",
       "dest": "/api/index.php"
     }
   ],
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "true",
-    "APP_URL": "https://bamboo.vercel.app",
+    "APP_URL": "https://duplicate-bamboo-vercel.vercel.app",
 
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
