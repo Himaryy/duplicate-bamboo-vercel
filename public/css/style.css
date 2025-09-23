@@ -1,0 +1,969 @@
+/* Header */
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    /* background-color: black; */
+}
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+a {
+    text-decoration: none;
+}
+#bg-asli {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    /* background-color: red; */
+}
+
+#bg-gambar {
+    background-image: url("/img/bg.png");
+    /* position: fixed; */
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* HEADER */
+#bg-header {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    position: sticky;
+    display: inline;
+}
+#bo-header {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+}
+#kiri-header {
+    width: 45%;
+    margin: 0 auto;
+    padding: 20px 5px;
+    float: left;
+}
+#atas-header {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+#atas-header h1 {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    font-size: 24px;
+    color: #fff;
+}
+#bawah-header {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+#bawah-header h1 {
+    width: 100%;
+    padding: 0 70px;
+    margin: 0 auto;
+    font-size: 24px;
+    color: #fff;
+}
+#kanan-header {
+    width: 50%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: right;
+    float: right;
+}
+#kanan-header ul {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    color: #fff;
+    float: left;
+}
+#kanan-header ul li {
+    margin: 0 auto;
+    padding: 34px 21px;
+    display: inline-block;
+}
+#kanan-header ul .kuning {
+    background-color: yellow;
+    color: black;
+    margin: 0 auto;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+#kanan-header ul li a {
+    color: #fff;
+}
+
+/* JUDUL */
+
+#bg-judul {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+}
+#bo-judul {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+}
+#bungkusjudul {
+    width: 50%;
+    margin: 15% auto 25% auto;
+    padding: 0 10px;
+    float: left;
+    /* position: absolute; */
+}
+#atas-judul {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+#atas-judul h1 {
+    color: #fff;
+    font-size: 46px;
+    font-family: Times;
+}
+#bawah-judul {
+    width: 100%;
+    margin: 10px auto;
+    padding: 0;
+}
+#bawah-judul h3 {
+    font-weight: normal;
+    color: #fff;
+}
+
+/* MOTTO */
+
+#bg-motto {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #00572d;
+    /* border-radius: 20% 20% 0 ; */
+}
+#bo-motto {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+}
+#bungkusmotto {
+    width: 70%;
+    margin: 0 auto;
+    padding: 0 0 100px 0;
+    text-align: center;
+}
+#logomotto {
+    padding: 50px;
+}
+#logomotto img {
+    height: 70px;
+    border-radius: 50%;
+}
+#motto h2 {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0 20px 0;
+    font-size: 36px;
+    line-height: 46px;
+    font-family: "Courier New", Courier, monospace;
+    color: #ffff33;
+}
+#motto h3 {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 0 20px 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "Courier New", Courier, monospace;
+    color: #ffff33;
+}
+
+/* ABOUT */
+
+#about-color {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #00572d;
+    /* border-radius: 20% 20% 0 ; */
+}
+#bg-about {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #eefdec;
+    border-radius: 55px 55px 0 0;
+}
+#bo-about {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+}
+#bungkus-about {
+    width: 100%;
+    margin: 0 auto;
+    padding: 70px 0 70px 0;
+}
+#img-about {
+    width: 47%;
+    margin: 0 auto;
+    padding: 0;
+    display: inline-flex;
+}
+#img-about img {
+    height: 612px;
+    width: 439px;
+    border-radius: 20px;
+}
+#about {
+    width: 50%;
+    margin: 200px auto;
+    padding: 0;
+    display: inline-block;
+    float: inline-end;
+}
+#about h2 {
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+    font-size: 16px;
+    border-radius: 20px;
+    background-color: #fffbe5;
+    color: #999900;
+    font-family: "Courier New", Courier, monospace;
+}
+#about h1 {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    margin: 0 auto;
+    font-size: 42px;
+    font-family: "Courier New", Courier, monospace;
+}
+#about h3 {
+    width: 100%;
+    padding: 5px 0 30px 0;
+    margin: 0 auto;
+    font-weight: lighter;
+    font-size: 16px;
+}
+
+/* VISI MISI */
+
+#bg-visi {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    background-color: #00572d;
+}
+#bo-visi {
+    width: 80%;
+    padding: 0;
+    margin: 0 auto;
+}
+#bungkus-visi {
+    width: 100%;
+    padding: 100px 0;
+    margin: 0 auto;
+    text-align: center;
+    display: inline-block;
+}
+#visi {
+    width: 50%;
+    padding: 0;
+    margin: 0 auto;
+    float: left;
+    text-align: center;
+}
+#visi img {
+    padding: 24px 0;
+    margin: 0 auto;
+}
+#visi h1 {
+    width: 100%;
+    padding: 20px 0;
+    margin: 0 auto;
+    font-family: "Courier New", Courier, monospace;
+    color: #ffff33;
+}
+#visi h3 {
+    width: 80%;
+    padding: 0;
+    line-height: 28px;
+    color: #ffff33;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    display: inline-block;
+}
+#misi {
+    width: 50%;
+    padding: 0;
+    margin: 0 auto;
+    float: left;
+}
+#misi img {
+    padding: 24px 0;
+    margin: 0 auto;
+}
+#misi h1 {
+    width: 100%;
+    padding: 20px 0;
+    margin: 0 auto;
+    font-family: "Courier New", Courier, monospace;
+    color: #ffff33;
+}
+#misi h3 {
+    width: 80%;
+    padding: 0;
+    line-height: 28px;
+    color: #ffff33;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    display: inline-block;
+}
+
+/* OUR SERPIS */
+
+#bg-ourserpis {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    display: inline-block;
+}
+#bo-ourserpis {
+    width: 80%;
+    padding: 0;
+    margin: 0 auto;
+}
+#bungkus-ourserpis {
+    width: 50%;
+    float: left;
+    padding: 100px 0 50px 0;
+    margin: 0 auto;
+}
+#bungkus-ourserpis h1 {
+    width: 100%;
+    padding: 20px 0;
+    margin: 0 auto;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 24px;
+    color: #999900;
+}
+#bungkus-ourserpis h3 {
+    width: 100%;
+    padding: 10px 0 20px 0;
+    margin: 0 auto;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    color: #000;
+    font-weight: lighter;
+    line-height: 24px;
+}
+
+/* FITUR SERPIS */
+#bg-fiturserpis {
+    width: 100%;
+    padding: 0 0 100px 0;
+    margin: 0 auto;
+}
+#bo-fiturserpis {
+    width: 80%;
+    padding: 0;
+    margin: 0 auto;
+}
+#bungkus-serpis {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+#cover-serpis {
+    width: 20%;
+    padding: 20px;
+    margin: 0 5px;
+    float: left;
+    background-color: #ffffcc;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+#cover-serpis img {
+    padding: 20px 0;
+    margin: 0 auto;
+}
+#cover-serpis h1 {
+    color: #000;
+    font-size: 24px;
+    padding: 10px 0 20px 0;
+    font-family: "Courier New", Courier, monospace;
+}
+#cover-serpis h3 {
+    color: #000;
+    font-size: 16px;
+    padding: 10px 0 20px 0;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: lighter;
+}
+#cover-serpis1 {
+    width: 20%;
+    padding: 20px;
+    margin: 0 5px;
+    float: left;
+    background-color: #f0f0f0;
+    border: 1px #ffdf33 solid;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+#cover-serpis1 img {
+    padding: 20px 0;
+    margin: 0 auto;
+}
+#cover-serpis1 h1 {
+    color: #000;
+    font-size: 24px;
+    padding: 10px 0 20px 0;
+    font-family: "Courier New", Courier, monospace;
+}
+#cover-serpis1 h3 {
+    color: #000;
+    font-size: 16px;
+    padding: 10px 0 20px 0;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: lighter;
+}
+
+/* Catalog */
+
+#bg-catalog {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+#bo-catalog {
+    width: 80%;
+    padding: 0;
+    margin: 0 auto;
+}
+#bungkus-catalog {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    display: inline-block;
+}
+#kiri-catalog {
+    width: 50%;
+    padding: 0;
+    margin: 0 auto;
+    float: left;
+}
+#kiri-catalog h3 {
+    background-color: #ffffe5;
+    color: #999900;
+    display: inline-block;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: lighter;
+    font-family: "Courier New", Courier, monospace;
+    border-radius: 10px;
+}
+#kiri-catalog h1 {
+    width: 100%;
+    padding: 20px 0;
+    margin: 0 auto;
+    font-size: 42px;
+    font-family: "Courier New", Courier, monospace;
+}
+#kanan-catalog {
+    width: 50%;
+    padding: 0;
+    margin: 0 auto;
+    float: left;
+}
+#kanan-catalog h3 {
+    width: 100%;
+    padding: 65px 0 20px 0;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: lighter;
+    font-family: "Courier New", Courier, monospace;
+}
+
+/* PRODUK */
+
+.container-product {
+    width: 80%;
+    height: 709px;
+    padding: 23px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin: 0 auto;
+}
+
+.card-product {
+    width: 378px;
+    height: 80%;
+    padding: 25px 0;
+    background: #00572d;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 19px;
+}
+
+.product-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+}
+
+.product-info {
+    width: 310px;
+    height: 162px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.product-title {
+    align-self: stretch;
+    text-align: center;
+    color: #fcfcfc;
+    font-size: 28px;
+    font-family: "Lora", serif;
+    font-weight: 700;
+    line-height: 38px;
+    word-wrap: break-word;
+}
+
+.product-description {
+    align-self: stretch;
+    color: #fcfcfc;
+    font-size: 16px;
+    font-family: "Quattrocento", serif;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.order-text {
+    width: 278px;
+    height: 33px;
+    color: #fcfcfc;
+    font-size: 18px;
+    font-family: "Lora", serif;
+    font-weight: 700;
+    line-height: 27px;
+    word-wrap: break-word;
+}
+
+.order-options {
+    padding: 0 6px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.order-option {
+    padding: 8px 10px;
+    background: #f5f5f5;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.order-option img {
+    width: 29px;
+    border-radius: 50%;
+}
+
+.order-label {
+    font-size: 20px;
+    font-family: "Quattrocento", serif;
+    font-weight: 700;
+    line-height: 28px;
+    word-wrap: break-word;
+}
+.order-label a {
+    font-size: 20px;
+    font-family: "Quattrocento", serif;
+    font-weight: 700;
+    line-height: 28px;
+    word-wrap: break-word;
+}
+
+.order-option:first-child .order-label a {
+    color: #139003;
+}
+
+.order-option:last-child .order-label a {
+    color: #999900;
+}
+
+/* CLIENT */
+#bg-client {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+#bo-client {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 0 100px 0;
+    background-color: #f0f0f0;
+    display: inline-block;
+    border-radius: 20px;
+}
+#client-header {
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 0 20px 0;
+}
+#bg-xxx {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+.bungkus-client {
+    width: 100%;
+    margin: 5px auto;
+    padding: 0;
+    display: inline-flex;
+    float: left;
+    align-items: center;
+}
+.client {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* Activity */
+
+.container-grid {
+    margin: 0 auto;
+    padding: 20px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    box-sizing: border-box;
+    /* background-color: #f0f0f0; */
+}
+
+.photo-grid {
+    width: 80%;
+    max-width: 1200px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.photo {
+    flex: 1;
+    margin: 5px;
+}
+
+.photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+/* Profil Pimpinan Perusahaan */
+
+.title-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.profile-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.profile-card {
+    background: #f0f0f0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile-name {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.profile-title {
+    font-size: 20px;
+    color: #777;
+    margin: 0;
+}
+
+.profile-description {
+    font-size: 16px;
+    color: #555;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* FOOTER */
+
+.container-footer {
+    width: 100%;
+    height: 311px;
+    position: relative;
+    background: #d9d9d9;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    overflow: hidden;
+}
+
+.background-footer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #d9d9d9;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.company-info-footer {
+    width: 402px;
+    height: 116px;
+    position: absolute;
+    left: 53px;
+    top: 37px;
+}
+
+.logo {
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    background: #00572d;
+    top: 20px;
+}
+
+.company-details {
+    position: absolute;
+    left: 107px;
+    /* top: 0; */
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.company-name {
+    width: 298px;
+    height: 26px;
+    color: #454545;
+    font-size: 24px;
+    font-family: Quattrocento, serif;
+    font-weight: 700;
+    line-height: 32px;
+    word-wrap: break-word;
+}
+
+.company-description {
+    width: 295px;
+    top: 52px;
+    position: absolute;
+    color: #454545;
+    font-size: 16px;
+    font-family: PT Sans, sans-serif;
+    font-weight: 400;
+    line-height: 20px;
+    word-wrap: break-word;
+}
+
+.site-links {
+    height: 200px;
+    position: absolute;
+    left: 663px;
+    top: 51px;
+}
+
+.site-links-title {
+    width: 114px;
+    height: 26px;
+    position: absolute;
+    color: #454545;
+    font-size: 24px;
+    font-family: Quattrocento, serif;
+    font-weight: 700;
+    line-height: 32px;
+    word-wrap: break-word;
+}
+
+.links {
+    width: 88px;
+    height: 158px;
+    position: absolute;
+    top: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+.links div {
+    color: #454545;
+    font-size: 16px;
+    font-family: Lora, serif;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.contact-info {
+    width: 177px;
+    height: 107px;
+    position: absolute;
+    left: 1117px;
+    top: 51px;
+}
+
+.contact-title {
+    width: 132px;
+    height: 26px;
+    position: absolute;
+    color: #141414;
+    font-size: 24px;
+    font-family: Quattrocento, serif;
+    font-weight: 700;
+    line-height: 32px;
+    word-wrap: break-word;
+}
+
+.contact-email {
+    width: 145px;
+    height: 26px;
+    position: absolute;
+    left: 32px;
+    top: 48px;
+    color: #141414;
+    font-size: 16px;
+    font-family: Lora, serif;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.contact-phone {
+    width: 132px;
+    height: 26px;
+    position: absolute;
+    left: 32px;
+    top: 81px;
+    color: #141414;
+    font-size: 16px;
+    font-family: Lora, serif;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.email-icon,
+.phone-icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    background: #838383;
+    border-radius: 9999px;
+}
+
+.email-icon {
+    left: 0px;
+    top: 49px;
+}
+
+.phone-icon {
+    left: 0px;
+    top: 82px;
+}
+
+.footer {
+    width: 100%;
+    height: 26px;
+    position: absolute;
+    /* left: 510px; */
+    text-align: center;
+    top: 275px;
+    color: #bfbfbf;
+    font-size: 20px;
+    font-family: Quattrocento, serif;
+    font-weight: 700;
+    line-height: 28px;
+    word-wrap: break-word;
+}
+
+.whatsapp-button {
+    padding: 8px 12px;
+    position: absolute;
+    left: 1117px;
+    top: 171px;
+    background: #1ac004;
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+}
+
+.whatsapp-button img {
+    width: 29px;
+    height: 29px;
+}
+
+.whatsapp-button div {
+    color: white;
+    font-size: 20px;
+    font-family: Quattrocento, serif;
+    font-weight: 700;
+    line-height: 28px;
+    word-wrap: break-word;
+}
