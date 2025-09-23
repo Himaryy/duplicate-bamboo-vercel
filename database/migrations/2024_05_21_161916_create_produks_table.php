@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produks', function (Blueprint $table) {
-            $table->string('pid');
+            $table->string('pid')->primary();
             $table->foreignId('kategori_id');
             // From edit migrate
             $table->string('kode_produk')->unique();
