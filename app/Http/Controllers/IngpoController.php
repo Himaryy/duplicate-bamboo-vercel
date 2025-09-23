@@ -131,18 +131,13 @@ class IngpoController extends Controller
         foreach ($fileFields as $field => $suffix) {
             if ($request->hasFile($field)) {
                 $file = $request->file($field);
-
-                // Nama file baru
                 $imageName = "{$id}_{$suffix}_" . time() . '.' . $file->getClientOriginalExtension();
 
-                // Hapus file lama jika ada
-                if ($ingpo->$field && Storage::exists('public/' . $ingpo->$field)) {
-                    Storage::delete('public/' . $ingpo->$field);
-                }
+                // Pindahkan file ke public/ingpo-images
+                $file->move(public_path('storage/ingpo-images'), $imageName);
 
-                // Simpan file baru dan update kolom database
-                $filePath = $file->storeAs('ingpo-images', $imageName, 'public');
-                $ingpo->$field = $filePath;
+                // Update kolom database dengan path relatif
+                $ingpo->$field = 'ingpo-images/' . $imageName;
             }
         }
 
