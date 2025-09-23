@@ -12,6 +12,7 @@ class Visitor extends Model
     protected $fillable = ['ip_address', 'visited_at'];
     public static function countToday()
     {
+        // asdasd
         return self::whereDate('visited_at', Carbon::today())->count();
     }
 
