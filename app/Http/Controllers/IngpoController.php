@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\ImageKitServices ;
 use App\Models\Ingpo;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -129,15 +131,25 @@ class IngpoController extends Controller
 
         // Loop to handle file uploads
         foreach ($fileFields as $field => $suffix) {
+            // inside your foreach loop
             if ($request->hasFile($field)) {
                 $file = $request->file($field);
                 $imageName = "{$id}_{$suffix}_" . time() . '.' . $file->getClientOriginalExtension();
 
-                // Pindahkan file ke public/ingpo-images
-                $file->move(public_path('storage/ingpo-images'), $imageName);
+                // get the binary content
+               $fileContent = file_get_contents($file->getRealPath());
+               
 
-                // Update kolom database dengan path relatif
-                $ingpo->$field = 'ingpo-images/' . $imageName;
+                // upload to ImageKit
+                $uploadImage = app(ImageKitServices::class)
+                            ->ImageKitUpload($fileContent, $imageName);
+
+                if ($uploadImage->result) {
+                    $ingpo->$field = $uploadImage->result->url;
+                } else {
+                    throw new \Exception('Upload Image Failed: ' .
+                        ($uploadImage->err->message ?? 'Unknown error.'));
+                }
             }
         }
 

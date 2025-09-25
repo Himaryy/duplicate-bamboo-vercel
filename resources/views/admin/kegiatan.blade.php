@@ -82,7 +82,7 @@
                     <input type="hidden" id="edit-id-{{ $i->id }}" name="id" value="{{ $i->id }}">
                     <div class="thumbnail">
                         <img id="edit-thumbnail-preview-{{ $i->id }}"
-                            src="{{ $i->image_path ? asset('/storage/' . $i->image_path) : 'https://via.placeholder.com/100' }}"
+                            src="{{ $i->image_path ? asset( $i->image_path) : 'https://via.placeholder.com/100' }}"
                             alt="Thumbnail" style="display: block; margin-bottom: 10px; max-width: 100px;">
                         <input type="file" id="edit-thumbnail-{{ $i->id }}" name="image"
                             onchange="previewImage(this, 'edit-thumbnail-preview-{{ $i->id }}')">
@@ -121,7 +121,7 @@
         <div class="card-photo">
             @foreach ($kegiatan as $i)
                 <div class="photo-card">
-                    <img src="{{ asset('/storage/' . $i->image_path) }}" alt="Photo Kegiatan" class="photo-image">
+                    <img src="{{ asset( $i->image_path) }}" alt="Photo Kegiatan" class="photo-image">
                     <div class="photo-overlay">
                         <button class="btn-edit" data-id="{{ $i->id }}" data-toggle="modal"
                             data-target="#editModal-{{ $i->id }}">
@@ -165,7 +165,7 @@
                 <div class="video-card">
                     @if ($v->video_path)
                         <video controls width="100%">
-                            <source src="{{ asset('storage/' . $v->video_path) }}" >
+                            <source src="{{ asset( $v->video_path) }}" >
                             Your browser does not support the video tag.
                         </video>
                     @endif

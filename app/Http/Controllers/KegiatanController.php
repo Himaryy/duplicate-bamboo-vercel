@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\ImageKitServices;
 use App\Models\Ingpo;
 use App\Models\Kegiatan;
 use App\Models\videokegiatan;
@@ -31,41 +32,44 @@ class KegiatanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image.*'    => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image.*'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'video_link' => 'nullable|url',
             'video_path' => 'nullable|mimes:mov,mp4,avi,mkv|max:20480',
         ]);
 
-        $videoPath = null;
-        $embedUrl = null;
-
-        // Pesan sukses awal
         $imageSuccess = false;
         $videoSuccess = false;
 
-        // Proses upload gambar jika ada
+        /* ----------  images -> ImageKit  ---------- */
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $index => $file) {
-                $imageName = 'kegiatan-' . time() . '-' . $index . '.' . $file->getClientOriginalExtension();
-                $imagePath = $file->storeAs('kegiatan-images', $imageName, 'public');
+                $imageName   = 'kegiatan-' . time() . '-' . $index . '.' . $file->getClientOriginalExtension();
+                $fileContent = file_get_contents($file->getRealPath());
 
-                Kegiatan::create([
-                    'image_path' => $imagePath,
-                ]);
+                $uploaded = app(ImageKitServices::class)->ImageKitUpload($fileContent, $imageName);
+
+                if (!$uploaded->result) {
+                    throw new \Exception('ImageKit image upload failed: ' . ($uploaded->err->message ?? ''));
+                }
+
+                Kegiatan::create(['image_path' => $uploaded->result->url]);
             }
             $imageSuccess = true;
         }
 
-        // Proses upload video file jika ada
+        /* ----------  video file -> ImageKit  ---------- */
         if ($request->hasFile('video_path')) {
-            $videoFile = $request->file('video_path');
-            $videoName = 'kegiatan-' . time() . '.' . $videoFile->getClientOriginalExtension();
-            $videoPath = $videoFile->storeAs('kegiatan-videos', $videoName, 'public');
+            $videoFile   = $request->file('video_path');
+            $videoName   = 'kegiatan-' . time() . '.' . $videoFile->getClientOriginalExtension();
+            $fileContent = file_get_contents($videoFile->getRealPath());
 
-            videoKegiatan::create([
-                'video_path' => $videoPath,
-            ]);
+            $uploaded = app(ImageKitServices::class)->ImageKitUpload($fileContent, $videoName);
 
+            if (!$uploaded->result) {
+                throw new \Exception('ImageKit video upload failed: ' . ($uploaded->err->message ?? ''));
+            }
+
+            VideoKegiatan::create(['video_path' => $uploaded->result->url]);
             $videoSuccess = true;
         }
 
@@ -147,124 +151,135 @@ class KegiatanController extends Controller
      * Update the specified resource in storage.
      */
     public function updateImage(Request $request, $id)
-    {
-        $kegiatan = Kegiatan::findOrFail($id);
+{
+    $kegiatan = Kegiatan::findOrFail($id);
 
+    $request->validate([
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'video_path' => 'nullable|url',
-        ]);
-
-        if ($request->hasFile('image')) {
-            // Delete the old image if it exists
-            if ($kegiatan->image_path) {
-                Storage::delete('public/' . $kegiatan->image_path);
+    if ($request->hasFile('image')) {
+        
+        if ($kegiatan->image_path) {
+            preg_match('/\/([^\/]+?)(?:_[a-zA-Z0-9]+\.[a-z]+)?$/', $kegiatan->image_path, $m);
+            $oldFileId = $m[1] ?? null;
+            if ($oldFileId) {
+                app(ImageKitServices::class)->ImageKitDelete($oldFileId);
             }
-
-            $image = $request->file('image');
-            // Handle image upload
-            $imageName = 'kegiatan-' . time() . '-' . $kegiatan->id . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs('kegiatan-images', $imageName, 'public');
-            $kegiatan->image_path = $imagePath;
         }
 
+      
+        $file        = $request->file('image');
+        $imageName   = 'kegiatan-' . time() . '-' . $kegiatan->id . '.' . $file->getClientOriginalExtension();
+        $fileContent = file_get_contents($file->getRealPath());
+
+        $uploaded = app(ImageKitServices::class)->ImageKitUpload($fileContent, $imageName);
+        if (!$uploaded->result) {
+            throw new \Exception('ImageKit image update failed: ' . ($uploaded->err->message ?? ''));
+        }
+
+        $kegiatan->image_path = $uploaded->result->url;
         $kegiatan->save();
-
-        return redirect()->back()->with('success', 'Images Update Successfully.');
     }
 
-    public function updateVideo(Request $request, $id)
-    {
-        // Cari video berdasarkan ID
-        $video = VideoKegiatan::findOrFail($id);
+    return redirect()->back()->with('success', 'Images Updated Successfully.');
+}
 
-        // Validasi input
-        $request->validate([
-            'video_path' => 'nullable|file|mimes:mov,mp4,avi,mkv|max:20480', // Max 20MB
-            'video_link' => 'nullable|url',
+   public function updateVideo(Request $request, $id)
+{
+    $video = VideoKegiatan::findOrFail($id);
+
+    $request->validate([
+        'video_path' => 'nullable|file|mimes:mov,mp4,avi,mkv|max:20480',
+        'video_link' => 'nullable|url',
+    ]);
+
+    
+    if ($request->hasFile('video_path')) {
+        /* delete old video from ImageKit */
+        if ($video->video_path) {
+            preg_match('/\/([^\/]+?)(?:_[a-zA-Z0-9]+\.[a-z]+)?$/', $video->video_path, $m);
+            $oldFileId = $m[1] ?? null;
+            if ($oldFileId) {
+                app(ImageKitServices::class)->ImageKitDelete($oldFileId);
+            }
+        }
+
+        $file        = $request->file('video_path');
+        $videoName   = 'kegiatan-' . time() . '.' . $file->getClientOriginalExtension();
+        $fileContent = file_get_contents($file->getRealPath());
+
+        $uploaded = app(ImageKitServices::class)->ImageKitUpload($fileContent, $videoName);
+        if (!$uploaded->result) {
+            throw new \Exception('ImageKit video update failed: ' . ($uploaded->err->message ?? ''));
+        }
+
+        $video->video_path = $uploaded->result->url;
+        $video->video_link = null;          
+    }
+   
+    
+    elseif ($request->filled('video_link')) {
+        /* delete old video file if exists */
+        if ($video->video_path) {
+            preg_match('/\/([^\/]+?)(?:_[a-zA-Z0-9]+\.[a-z]+)?$/', $video->video_path, $m);
+            $oldFileId = $m[1] ?? null;
+            if ($oldFileId) {
+                app(ImageKitServices::class)->ImageKitDelete($oldFileId);
+            }
+        }
+
+        $embedUrl = $this->convertYoutubeLinkToEmbed($request->video_link);
+        if (!$embedUrl) {
+            return redirect()->back()->withErrors(['video_link' => 'Invalid YouTube URL.']);
+        }
+
+        $video->video_link = $embedUrl;
+        $video->video_path = null;          // reset file
+    } else {
+        return redirect()->back()->withErrors([
+            'video_path' => 'Please provide a valid video file or YouTube URL.',
+            'video_link' => 'Please provide a valid video file or YouTube URL.',
         ]);
-
-        // Proses file video jika diunggah
-        if ($request->hasFile('video_path')) {
-            // Hapus video lama jika ada dan file-nya benar-benar ada
-            if ($video->video_path && Storage::exists('public/' . $video->video_path)) {
-                Storage::delete('public/' . $video->video_path);
-            }
-
-            // Simpan video baru
-            $uploadedFile = $request->file('video_path');
-            $fileName = 'kegiatan-' . time() . '.' . $uploadedFile->getClientOriginalExtension();
-            $filePath = $uploadedFile->storeAs('kegiatan-videos', $fileName, 'public');
-
-            // Set field database
-            $video->video_path = $filePath;
-            $video->video_link = null; // Reset link YouTube
-        }
-        // Proses YouTube link jika diberikan
-        elseif ($request->filled('video_link')) {
-            // Hapus file video lama jika ada
-            if ($video->video_path && Storage::exists('public/' . $video->video_path)) {
-                Storage::delete('public/' . $video->video_path);
-            }
-
-            // Konversi YouTube link ke embed URL
-            $embedUrl = $this->convertYoutubeLinkToEmbed($request->video_link);
-            if (!$embedUrl) {
-                return redirect()->back()->withErrors(['video_link' => 'Invalid YouTube URL.']);
-            }
-
-            // Set field database
-            $video->video_link = $embedUrl;
-            $video->video_path = null; // Reset video file
-        } else {
-            return redirect()->back()->withErrors(['video_path' => 'Please provide a valid video file or YouTube URL.']);
-        }
-
-        // Simpan perubahan ke database
-        $video->save();
-
-        // Check if both fields are empty
-        if (!$request->filled('video_link') && !$request->hasFile('video_path')) {
-            return back()->withErrors([
-                'video_link' => 'At least one field (YouTube link or uploaded video) is required.',
-                'video_path' => 'At least one field (YouTube link or uploaded video) is required.',
-            ])->withInput();
-        }
-
-        return redirect()->back()->with('success', 'Video updated successfully.');
     }
+
+    $video->save();
+    return redirect()->back()->with('success', 'Video updated successfully.');
+}
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroyImage($id)
-    {
-        $kegiatan = Kegiatan::findOrFail($id);
+   public function destroyImage($id)
+{
+    $kegiatan = Kegiatan::findOrFail($id);
 
-        if ($kegiatan->image_path) {
-            Storage::delete('public/' . $kegiatan->image_path);
+    if ($kegiatan->image_path) {
+        preg_match('/\/([^\/]+?)(?:_[a-zA-Z0-9]+\.[a-z]+)?$/', $kegiatan->image_path, $m);
+        $fileId = $m[1] ?? null;
+        if ($fileId) {
+            app(ImageKitServices::class)->ImageKitDelete($fileId);
         }
-
-        $kegiatan->delete();
-
-        return redirect()->back()->with('success', 'Images Delete Successfully.');
     }
+
+    $kegiatan->delete();
+    return redirect()->back()->with('success', 'Images Deleted Successfully.');
+}
 
     public function destroyVideo($id)
-    {
-        $video = videokegiatan::findOrFail($id);
-        if (!$video) {
-            return redirect()->back()->withErrors(['error' => 'Data not found.']);
+{
+    $video = VideoKegiatan::findOrFail($id);
+
+    if ($video->video_path) {
+        preg_match('/\/([^\/]+?)(?:_[a-zA-Z0-9]+\.[a-z]+)?$/', $video->video_path, $m);
+        $fileId = $m[1] ?? null;
+        if ($fileId) {
+            app(ImageKitServices::class)->ImageKitDelete($fileId);
         }
-
-        if ($video->video_path) {
-            Storage::delete('public/' . $video->video_path);
-        }
-
-        $video->delete();
-
-        return redirect()->back()->with('success', 'Video Deleted Successfully.');
     }
+
+    $video->delete();
+    return redirect()->back()->with('success', 'Video Deleted Successfully.');
+}
 }

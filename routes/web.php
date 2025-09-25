@@ -16,6 +16,7 @@ use App\Http\Controllers\IntegrasiController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TransaksiMidtrans;
 use App\Http\Controllers\VisitorController;
+use App\Http\Middleware\VerifyCsrfToken;
 
 /*
 |--------------------------------------------------------------------------

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dashboard Admin</title>
         @foreach($ingpo as $i)
-        <link rel="icon" href="{{ asset('/storage/' . $i->favicon) }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset( $i->favicon) }}" type="image/x-icon">
         @endforeach
 
         <!-- Link -->

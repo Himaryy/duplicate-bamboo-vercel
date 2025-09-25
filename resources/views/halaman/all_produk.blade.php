@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/style-all-produk.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     @foreach ($ingpo as $i)    
-    <link rel="icon" href="{{ asset('/storage/' . $i->favicon) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset( $i->favicon) }}" type="image/x-icon">
     @endforeach
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js"></script>
@@ -21,10 +21,10 @@
             @foreach ($ingpo as $i)
             <div id="navbar">
                 <div id="wrapper-navbar">
-                    <a href="dashboard">
+                    <a href="/">
                         <div id="header-kiri">
                             <div id="logo-company">
-                                <img src="{{ asset('/storage/' . $i->favicon) }}" alt="Logo">
+                                <img src="{{ asset( $i->favicon) }}" alt="Logo">
                             </div>
                             <div id="header-teks">
                                 <div id="header-atas">
@@ -39,7 +39,7 @@
                 </div>
                 <div id="header-kanan" class="navbar-links">
                     <ul>
-                        <li><a href="dashboard">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         {{-- <li>About Us</li> --}}
                         <li><a href="catalog">Catalog</a></li>
                         {{-- <li>Contact Us</li> --}}
@@ -49,7 +49,7 @@
                         <span id="burger-icon">&#9776;</span>
                     </div>
                     <div class="burger-menu-list" id="burgerMenuList">
-                        <li><a href="dashboard">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         {{-- <li>About Us</li> --}}
                         <li><a href="catalog">Catalog</a></li>
                         {{-- <a href="#">Contact Us</a> --}}
@@ -136,7 +136,7 @@
                         <div id="card-produk">
                             <!-- Image and overlay section -->
                             <div class="slide-img">
-                                <img src="{{ asset('storage/' . $p->image) }}" alt="Product Image">
+                                <img src="{{ asset( $p->image) }}" alt="Product Image">
                                 <div class="overlay">
                                     <a href="{{$p->tokped}}" class="shop-button" target="_blank">
                                         <img src="{{ asset('img\social-media\tokped.svg') }}" alt="Tokopedia" class="shop-logo">

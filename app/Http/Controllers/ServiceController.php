@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\ImageKitServices;
 use App\Models\Ingpo;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -47,19 +48,28 @@ class ServiceController extends Controller
             'desc' => 'required|string|max:5000',
         ]);
 
-        $imagePath = null;
-        $imageName = uniqid() . '.' . $request->file('img')->getClientOriginalExtension();
-        if ($request->file('img')) {
-            $imagePath = $request->file('img')->storeAs('service-images', $imageName, 'public');
-        }
-        $service = new Service([
-            'img' => $imagePath,
-            'judul' => $request->judul,
-            'desc' => $request->desc,
-        ]);
-        // dd($pimpinan);
-        $service->save();
-        return redirect()->route('services.index')->with('success', 'Service added successfully.');
+        /* ---------- upload to ImageKit ---------- */
+            $file        = $request->file('img');
+            $imageName   = uniqid() . '.' . $file->getClientOriginalExtension();
+            $fileContent = file_get_contents($file->getRealPath());
+
+            $uploaded = app(ImageKitServices::class)
+                        ->ImageKitUpload($fileContent, $imageName);
+
+            if (!$uploaded->result) {
+                throw new \Exception('ImageKit upload failed: '
+                    . ($uploaded->err->message ?? 'Unknown error'));
+            }
+
+            /* ---------- save URL to DB ---------- */
+            Service::create([
+                'img'   => $uploaded->result->url,   // <- ImageKit URL
+                'judul' => $request->judul,
+                'desc'  => $request->desc,
+            ]);
+
+            return redirect()->route('services.index')
+                            ->with('success', 'Service added successfully.');
     }
 
     /**
@@ -82,30 +92,48 @@ class ServiceController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'img' => 'nullable|image|max:5120',
-            'judul' => 'required|string',
-            'desc' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'img'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+        'judul' => 'required|string',
+        'desc'  => 'required|string',
+    ]);
 
-        $service = Service::findOrFail($id);
+    $service = Service::findOrFail($id);
 
-        // Update the image if a new one is uploaded
-        if ($request->file('img')) {
-            $imageNameEdit = $id . '.' . $request->file('img')->getClientOriginalExtension();
-            if ($service->img) {
-                Storage::delete($service->img); // Delete old image
+    
+    if ($request->hasFile('img')) {
+       
+        if ($service->img) {
+           
+            preg_match('/\/([^\/]+?)(?:_[a-zA-Z0-9]+\.[a-z]+)?$/', $service->img, $m);
+            $fileId = $m[1] ?? null;
+            if ($fileId) {
+                app(ImageKitServices::class)->ImageKitDelete($fileId);
             }
-            $service->img = $request->file('img')->storeAs('service-images', $imageNameEdit, 'public');
         }
 
-        $service->judul = $request->judul;
-        $service->desc = $request->desc;
-        $service->save();
+       
+        $file        = $request->file('img');
+        $imageName   = $id . '_' . time() . '.' . $file->getClientOriginalExtension();
+        $fileContent = file_get_contents($file->getRealPath());
 
-        return redirect()->route('services.index')->with('success', 'Service updated successfully.');
+        $uploaded = app(ImageKitServices::class)->ImageKitUpdate($fileContent, $imageName);
+        if (!$uploaded->result) {
+            throw new \Exception('ImageKit update failed: ' . ($uploaded->err->message ?? ''));
+        }
+
+        $service->img = $uploaded->result->url;   // save ImageKit URL
     }
+
+    
+    $service->judul = $request->judul;
+    $service->desc  = $request->desc;
+    $service->save();
+
+    return redirect()->route('services.index')
+                     ->with('success', 'Service updated successfully.');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -113,16 +141,18 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         $service = Service::findOrFail($id);
-        if ($service) {
-            // Delete the image from storage if it exists
-            if ($service->img) {
-                Storage::delete($service->img);
-            }
 
-            // Delete the record from the database
-            $service->delete();
+        if ($service->img) {
+            preg_match('/\/([^\/]+?)(?:_[a-zA-Z0-9]+\.[a-z]+)?$/', $service->img, $m);
+            $fileId = $m[1] ?? null;
+            if ($fileId) {
+                app(ImageKitServices::class)->ImageKitDelete($fileId);
+            }
         }
 
-        return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
+        $service->delete();
+
+        return redirect()->route('services.index')
+                        ->with('success', 'Service deleted successfully.');
     }
 }

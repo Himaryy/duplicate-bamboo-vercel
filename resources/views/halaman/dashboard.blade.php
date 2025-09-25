@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @foreach ($ingpo as $i)    
-    <link rel="icon" href="{{ asset('/storage/' . $i->favicon) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset( $i->favicon) }}" type="image/x-icon">
     @endforeach
     <link rel="stylesheet" href="{{ asset('css/style-new-dashboard.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -24,7 +24,7 @@
             <div id="bg-navbar">
                 <div class="wrapper-bg">
                     <div id="background-img">
-                        <img src="{{ asset('/storage/' . $i->image_header) }}" alt="Background Image">
+                        <img src="{{ asset( $i->image_header) }}" alt="Background Image">
                     </div>
                 </div>
                 <div id="navbar">
@@ -32,7 +32,7 @@
                             <div id="header-kiri">
                                 <a href="/">
                                     <div id="logo-company">
-                                        <img src="{{ asset('/storage/' . $i->favicon) }}" alt="Logo">
+                                        <img src="{{ asset( $i->favicon) }}" alt="Logo">
                                     </div>
                                     <div id="header-teks">
                                         <div id="header-atas">
@@ -97,7 +97,7 @@
             <div id="content-about-us">
                 <div id="container-about-us">
                     <div id="img-about-us">
-                        <img src="{{ asset('/storage/' . $i->image_about) }}" alt="About Us">
+                        <img src="{{ asset( $i->image_about) }}" alt="About Us">
                     </div>
                     <div id="text-about-us">
                         <p id="judul-about-us">{{ $i->judul_about }}</p>
@@ -127,7 +127,7 @@
                         </div>
                     </div>
                     <div class="container-visi-misi-image">
-                        <img src="{{ asset('/storage/' . $i->image_visi_misi) }}" alt="Photo Visi Misi">
+                        <img src="{{ asset( $i->image_visi_misi) }}" alt="Photo Visi Misi">
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@
                         @foreach ($service as $s)
                         <div class="service-card">
                             <div class="icon-service">
-                                <img src="{{ asset('/storage/' . $s->img) }}" alt="Service Icon">
+                                <img src="{{ asset( $s->img) }}" alt="Service Icon">
                             </div>
                             <div class="judul-service">
                                 <p>{{ $s->judul }}</p>
@@ -181,7 +181,7 @@
                                 <div class="box">
                                     <!-- Image and overlay -->
                                     <div class="slide-img">
-                                        <img src="{{ asset('storage/' . $p->image) }}" alt="Product Image">
+                                        <img src="{{ asset( $p->image) }}" alt="Product Image">
                                         <div class="overlay">
                                             <a href="{{$p->tokped}}" class="shop-button" target="_blank">
                                                 <img src="{{ asset('img\social-media\tokped.svg') }}" alt="Tokopedia" class="shop-logo">
@@ -238,7 +238,7 @@
                     <div class="carousel-track-act">
                         @foreach ($kegiatan as $k)                    
                         <div class="carousel-slide-act">
-                            <img src="{{ asset('storage/' . $k->image_path) }}" alt="Kegiatan 1">
+                            <img src="{{ asset( $k->image_path) }}" alt="Kegiatan 1">
                         </div>
                         @endforeach
                     </div>
@@ -260,7 +260,7 @@
                                 ></iframe>
                             @elseif ($v->video_path)
                                 <video controls width="100%">
-                                    <source src="{{ asset('storage/' . $v->video_path) }}" type="video/mp4">
+                                    <source src="{{ asset( $v->video_path) }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             @endif
@@ -278,7 +278,7 @@
                         @foreach ($pimpinan as $pm)                            
                         <div class="profile-card">
                             <div id="foto-pimpinan">
-                                <img src="{{ asset('storage/' . $pm->image) }}" alt="Image 1">
+                                <img src="{{ asset( $pm->image) }}" alt="Image 1">
                             </div>
                             <p class="nama-pimpinan">{{$pm->name}}</p>
                             <p class="jabatan-pimpinan">{{$pm->jabatan}}</p>
@@ -296,7 +296,7 @@
                         
                     <div id="company-footer">
                         <div id="logo-company">
-                            <img src="{{ asset('/storage/' . $i->favicon) }}" alt="Logo">
+                            <img src="{{ asset( $i->favicon) }}" alt="Logo">
                         </div>
                         <div id="company-details">
                             <div id="company-name">{{$i->judul_footer}}</div>

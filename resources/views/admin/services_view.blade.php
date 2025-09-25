@@ -77,7 +77,7 @@
                     <tr class="details-row-service">
                         <td colspan="5">
                             @if ($p->img)
-                                <img src="{{ asset('/storage/' . $p->img) }}" alt="" id="avatar-service">
+                                <img src="{{ asset( $p->img) }}" alt="" id="avatar-service">
                             @else
                                 <img src="/img/default-img/default.png" alt="" id="avatar-service">
                             @endif
@@ -157,7 +157,7 @@
             </div>
             <div class="thumbnail">
                 <input type="hidden" name="oldImage" value="{{ $p->img }}">
-                <img id="thumbnail-preview-{{ $p->id }}" src="{{ asset('/storage/' . $p->img) }}" alt="Thumbnail">
+                <img id="thumbnail-preview-{{ $p->id }}" src="{{ asset( $p->img) }}" alt="Thumbnail">
                 <input type="file" id="thumbnail-{{ $p->id }}" name="img">
                 @if ($errors->has('img'))
                     <p class="alert-modal alert-danger">{{ $errors->first('img') }}</p>

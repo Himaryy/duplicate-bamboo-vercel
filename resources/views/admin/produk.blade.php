@@ -103,7 +103,7 @@
                     <tr class="details-row-produk">
                         <td colspan="7">
                             @if ($p->image)
-                            <img src="{{asset('/storage/' .$p->image)}}" alt="Image Produk" id="avatar-produk">
+                            <img src="{{asset($p->image)}}" alt="Image Produk" id="avatar-produk">
                             @else
                             <img src="/img/default-img/default.png" alt="" id="avatar-produk">
                             @endif
@@ -319,7 +319,7 @@
             </div>
             <div class="thumbnail">
                 <input type="hidden" name="oldImage" value="{{ $p->image }}">
-                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset('/storage/' . $p->image) }}" alt="Thumbnail">
+                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset( $p->image) }}" alt="Thumbnail">
                 <input type="file" id="thumbnail-{{ $p->pid }}" name="image">
                 @if ($errors->has('image'))
                     <p class="alert-modal alert-danger">{{ $errors->first('image') }}</p>
@@ -327,7 +327,7 @@
             </div>
             <div class="thumbnail">
                 <input type="hidden" name="oldImage" value="{{ $p->image1 }}">
-                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset('/storage/' . $p->image1) }}" alt="Thumbnail">
+                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset( $p->image1) }}" alt="Thumbnail">
                 <input type="file" id="thumbnail-{{ $p->pid }}" name="image1">
                 @if ($errors->has('image1'))
                     <p class="alert-modal alert-danger">{{ $errors->first('image1') }}</p>
@@ -335,7 +335,7 @@
             </div>
             <div class="thumbnail">
                 <input type="hidden" name="oldImage" value="{{ $p->image2 }}">
-                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset('/storage/' . $p->image2) }}" alt="Thumbnail">
+                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset( $p->image2) }}" alt="Thumbnail">
                 <input type="file" id="thumbnail-{{ $p->pid }}" name="image2">
                 @if ($errors->has('image2'))
                     <p class="alert-modal alert-danger">{{ $errors->first('image2') }}</p>
@@ -343,7 +343,7 @@
             </div>
             <div class="thumbnail">
                 <input type="hidden" name="oldImage" value="{{ $p->image3 }}">
-                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset('/storage/' . $p->image3) }}" alt="Thumbnail">
+                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset($p->image3) }}" alt="Thumbnail">
                 <input type="file" id="thumbnail-{{ $p->pid }}" name="image3">
                 @if ($errors->has('image3'))
                     <p class="alert-modal alert-danger">{{ $errors->first('image3') }}</p>
@@ -351,7 +351,7 @@
             </div>
             <div class="thumbnail">
                 <input type="hidden" name="oldImage" value="{{ $p->image4 }}">
-                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset('/storage/' . $p->image4) }}" alt="Thumbnail">
+                <img id="thumbnail-preview-{{ $p->pid }}" src="{{ asset($p->image4) }}" alt="Thumbnail">
                 <input type="file" id="thumbnail-{{ $p->pid }}" name="image4">
                 @if ($errors->has('image4'))
                     <p class="alert-modal alert-danger">{{ $errors->first('image4') }}</p>

@@ -37,7 +37,7 @@
             <h2>Logo</h2>
             <input type="file" id="favicon" name="favicon">
             <div class="image-preview">
-                <img id="imageHeaderPreview1" src="{{ asset('storage/' . $i->favicon) }}" style="max-width: 200px; max-height: 150px;">
+                <img id="imageHeaderPreview1" src="{{ $i->favicon }}" style="max-width: 200px; max-height: 150px;">
             </div>
         </div>
 
@@ -51,7 +51,7 @@
             <h2>Background Header</h2>
             <input type="file" id="image_header" name="image_header" onchange="previewImage(event, 'imageHeaderPreview')">
             <div class="image-preview">
-                <img id="imageHeaderPreview" src="{{ asset('storage/' . $i->image_header) }}" alt="Image Preview" style="max-width: 200px; max-height: 150px;">
+                <img id="imageHeaderPreview" src="{{ asset( $i->image_header) }}" alt="Image Preview" style="max-width: 200px; max-height: 150px;">
             </div>
         </div>
 
@@ -78,7 +78,7 @@
             <h2>Image About</h2>
             <input type="file" id="image_about" name="image_about" onchange="previewImage(event, 'imageAboutPreview')">
             <div class="image-preview">
-                <img id="imageAboutPreview" src="{{ asset('storage/' . $i->image_about) }}" alt="Image Preview" style="max-width: 200px; max-height: 150px;">
+                <img id="imageAboutPreview" src="{{ asset( $i->image_about) }}" alt="Image Preview" style="max-width: 200px; max-height: 150px;">
             </div>
         </div>
 
@@ -93,7 +93,7 @@
             <h2>Image Visi Misi</h2>
             <input type="file" id="image_visi" name="image_visi_misi" onchange="previewImage(event, 'imageVisiPreview')">
             <div class="image-preview">
-                <img id="imageVisiPreview" src="{{ asset('storage/' . $i->image_visi_misi) }}" alt="Image Preview" style="max-width: 200px; max-height: 150px;">
+                <img id="imageVisiPreview" src="{{ asset( $i->image_visi_misi) }}" alt="Image Preview" style="max-width: 200px; max-height: 150px;">
             </div>
         </div>
 

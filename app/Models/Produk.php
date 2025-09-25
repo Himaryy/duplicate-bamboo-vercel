@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     use HasFactory;
-    // protected $guarded = ['id'];
+
+    protected $primaryKey = 'pid';   // not an array
+    public $incrementing  = false;   // pid is NOT auto-increment
+    protected $keyType     = 'string';
+
     protected $fillable = [
         'pid',
         'kode_produk',
@@ -26,9 +30,9 @@ class Produk extends Model
         'tokped',
         'shopee',
     ];
+
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
     }
-    // protected $primaryKey = ['pid'];
 }

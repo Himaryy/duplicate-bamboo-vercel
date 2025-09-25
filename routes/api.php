@@ -18,5 +18,5 @@ use App\Http\Controllers\TransaksiController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('create-transaction/notification', [TransaksiController::class, 'notificationHandler']);
+Route::post('/create-transaction/notification', [TransaksiController::class, 'notificationHandler']);
 Route::post('/send-whatsapp', [MessageController::class, 'send']);

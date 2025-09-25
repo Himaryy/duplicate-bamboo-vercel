@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @foreach($ingpo as $i)
-    <link rel="icon" href="{{ asset('/storage/' . $i->favicon) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset( $i->favicon) }}" type="image/x-icon">
     @endforeach
     <link rel="stylesheet" href="{{ asset('css/style-detail-produk.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
@@ -26,7 +26,7 @@
                 <div id="header-kiri">
                     <a href="{{ route('dashboard.index') }}">
                         <div id="logo-company">
-                            <img src="{{ asset('/storage/' . $i->favicon) }}" alt="Logo">
+                            <img src="{{ asset(  $i->favicon) }}" alt="Logo">
                         </div>
                     </a>
                     <div id="header-teks">
@@ -129,25 +129,25 @@
                 <!-- Product Gallery with Main Image and Thumbnails -->
                 <div id="image-produk">
                     <div class="main-image">
-                        <img id="main-image" src="{{ asset('/storage/' . $p->image) }}" alt="Gambar {{$p->nama_produk}}">
+                        <img id="main-image" src="{{ asset(  $p->image) }}" alt="Gambar {{$p->nama_produk}}">
                     </div>
                     <!-- Thumbnails below the main image -->
                     <div class="thumbnail-carousel">
                         <div class="thumbnail-images">
                             @if ($p->image)
-                                <img src="{{ asset('/storage/' . $p->image) }}" alt="Thumbnail 1" onclick="changeMainImage(this)">
+                                <img src="{{ asset(  $p->image) }}" alt="Thumbnail 1" onclick="changeMainImage(this)">
                             @endif
                             @if ($p->image1)
-                                <img src="{{ asset('/storage/' . $p->image1) }}" alt="Thumbnail 1" onclick="changeMainImage(this)">
+                                <img src="{{ asset(  $p->image1) }}" alt="Thumbnail 1" onclick="changeMainImage(this)">
                             @endif
                             @if ($p->image2)
-                                <img src="{{ asset('/storage/' . $p->image2) }}" alt="Thumbnail 2" onclick="changeMainImage(this)">
+                                <img src="{{ asset(  $p->image2) }}" alt="Thumbnail 2" onclick="changeMainImage(this)">
                             @endif
                             @if ($p->image3)
-                                <img src="{{ asset('/storage/' . $p->image3) }}" alt="Thumbnail 3" onclick="changeMainImage(this)">
+                                <img src="{{ asset(  $p->image3) }}" alt="Thumbnail 3" onclick="changeMainImage(this)">
                             @endif
                             @if ($p->image4)
-                                <img src="{{ asset('/storage/' . $p->image4) }}" alt="Thumbnail 4" onclick="changeMainImage(this)">
+                                <img src="{{ asset(  $p->image4) }}" alt="Thumbnail 4" onclick="changeMainImage(this)">
                             @endif
                         </div>
                      </div>                    
@@ -258,7 +258,7 @@
                 @foreach($produkLainnya as $p)
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="{{ asset('/storage/' . $p->image) }}" alt="Gambar {{ $p->nama_produk }}">
+                        <img src="{{ asset(  $p->image) }}" alt="Gambar {{ $p->nama_produk }}">
                     </div>
                     <div class="product-info">
                         <h3>{{ $p->nama_produk }}</h3>
